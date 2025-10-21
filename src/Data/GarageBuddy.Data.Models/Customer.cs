@@ -1,5 +1,6 @@
 ﻿namespace GarageBuddy.Data.Models
 {
+    using GarageBuddy.Data.Models.Vehicle;
     using static GarageBuddy.Common.Constants.EntityValidationConstants.Customer;
 
     public class Customer : BaseDeletableModel<Guid>
@@ -30,5 +31,7 @@
 
         [ForeignKey(nameof(ApplicationUserId))]
         public ApplicationUser? ApplicationUser { get; set; }
+
+        public ICollection<Vehicle> Vehicles { get; set; } = new HashSet<Vehicle>();
     }
 }

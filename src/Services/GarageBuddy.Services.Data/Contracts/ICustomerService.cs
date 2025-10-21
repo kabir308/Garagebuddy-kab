@@ -17,5 +17,9 @@
         public Task<IResult<Guid>> CreateAsync(CustomerServiceModel model);
 
         public Task<IResult> EditAsync(Guid id, CustomerServiceModel model);
+
+        public Task<IResult<CustomerServiceModel>> GetWithVehiclesAsync(Guid id);
+
+        public Task<IResult> DeleteAsync(Guid id);
     }
 }
