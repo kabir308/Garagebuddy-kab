@@ -1,0 +1,126 @@
+@model GarageBuddy.Web.ViewModels.Job.JobInputModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Job</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="CustomerId" class="control-label"></label>
+                <select asp-for="CustomerId" class ="form-control" asp-items="Model.Customers"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="VehicleId" class="control-label"></label>
+                <select asp-for="VehicleId" class="form-control" asp-items="Model.Vehicles"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="JobStatusId" class="control-label"></label>
+                <select asp-for="JobStatusId" class="form-control" asp-items="Model.JobStatuses"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="TechnicianId" class="control-label"></label>
+                <select asp-for="TechnicianId" class="form-control" asp-items="Model.Technicians"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <h2>Job Items</h2>
+            <table class="table" id="jobItemsTable">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.JobItems.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                <input type="hidden" asp-for="JobItems[i].Id" />
+                                <select asp-for="JobItems[i].JobItemTypeId" class="form-control" asp-items="@ViewBag.JobItemTypes"></select>
+                            </td>
+                            <td>
+                                <input asp-for="JobItems[i].Quantity" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="JobItems[i].Price" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="JobItems[i].Description" class="form-control" />
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger remove-item">Remove</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-primary" id="add-item">Add Item</button>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            let jobItemIndex = @Model.JobItems.Count;
+            const jobItemTypes = @Html.Raw(Json.Serialize(ViewBag.JobItemTypes));
+
+            $("#add-item").click(function () {
+                let options = '';
+                for (let i = 0; i < jobItemTypes.length; i++) {
+                    options += `<option value="${jobItemTypes[i].value}">${jobItemTypes[i].text}</option>`;
+                }
+
+                var newRow = `
+                    <tr>
+                        <td>
+                            <select name="JobItems[${jobItemIndex}].JobItemTypeId" class="form-control">${options}</select>
+                        </td>
+                        <td>
+                            <input name="JobItems[${jobItemIndex}].Quantity" class="form-control" />
+                        </td>
+                        <td>
+                            <input name="JobItems[${jobItemIndex}].Price" class="form-control" />
+                        </td>
+                        <td>
+                            <input name="JobItems[${jobItemIndex}].Description" class="form-control" />
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger remove-item">Remove</button>
+                        </td>
+                    </tr>`;
+                $("#jobItemsTable tbody").append(newRow);
+                jobItemIndex++;
+            });
+
+            $("#jobItemsTable").on("click", ".remove-item", function () {
+                $(this).closest("tr").remove();
+            });
+        });
+    </script>
+}

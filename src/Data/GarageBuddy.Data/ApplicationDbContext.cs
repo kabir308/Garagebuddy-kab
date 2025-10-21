@@ -51,6 +51,8 @@
 
         public DbSet<Customer> Customers { get; set; } = null!;
 
+        public DbSet<Technician> Technicians { get; set; } = null!;
+
         public DbSet<Garage> Garages { get; set; } = null!;
 
         public override int SaveChanges() => this.SaveChanges(true);

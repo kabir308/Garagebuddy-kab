@@ -43,7 +43,12 @@
 
         public DateTime? CompletedOnEstimated { get; set; }
 
+        public Guid? TechnicianId { get; set; }
+
         // Navigation properties
+        [ForeignKey(nameof(TechnicianId))]
+        public virtual Technician? Technician { get; set; }
+
         [ForeignKey(nameof(CustomerId))]
         public virtual Customer Customer { get; set; } = null!;
 
