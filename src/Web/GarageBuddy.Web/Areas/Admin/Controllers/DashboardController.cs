@@ -1,4 +1,4 @@
-﻿namespace GarageBuddy.Web.Areas.Admin.Controllers
+namespace GarageBuddy.Web.Areas.Admin.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
 

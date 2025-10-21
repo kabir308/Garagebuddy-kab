@@ -11,7 +11,6 @@
     using Microsoft.EntityFrameworkCore;
 
     using Models;
-    using Models.Billing;
     using Models.Job;
     using Models.Vehicle;
 
@@ -52,19 +51,7 @@
 
         public DbSet<Customer> Customers { get; set; } = null!;
 
-        public DbSet<Technician> Technicians { get; set; } = null!;
-
         public DbSet<Garage> Garages { get; set; } = null!;
-
-        #region "Billing"
-        public DbSet<Quote> Quotes { get; set; } = null!;
-
-        public DbSet<QuoteItem> QuoteItems { get; set; } = null!;
-
-        public DbSet<Invoice> Invoices { get; set; } = null!;
-
-        public DbSet<InvoiceItem> InvoiceItems { get; set; } = null!;
-        #endregion
 
         public override int SaveChanges() => this.SaveChanges(true);
 

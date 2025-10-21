@@ -137,32 +137,5 @@
 
             return await base.EditAsync(id, model, "Customer");
         }
-
-        public async Task<IResult<CustomerServiceModel>> GetWithVehiclesAsync(Guid id)
-        {
-            if (!await ExistsAsync(id))
-            {
-                return await Result<CustomerServiceModel>.FailAsync(string.Format(Errors.EntityNotFound, nameof(Customer)));
-            }
-
-            var customer = await customerRepository.All(ReadOnlyOption.ReadOnly, DeletedFilter.NotDeleted)
-                .Include(c => c.Vehicles)
-                .FirstOrDefaultAsync(c => c.Id == id);
-
-            var model = this.Mapper.Map<CustomerServiceModel>(customer);
-            return await Result<CustomerServiceModel>.SuccessAsync(model);
-        }
-
-        public async Task<IResult> DeleteAsync(Guid id)
-        {
-            if (!await ExistsAsync(id))
-            {
-                return await Result.FailAsync(string.Format(Errors.EntityNotFound, nameof(Customer)));
-            }
-
-            await customerRepository.DeleteAsync(id);
-            await customerRepository.SaveChangesAsync();
-            return await Result.SuccessAsync();
-        }
     }
 }
