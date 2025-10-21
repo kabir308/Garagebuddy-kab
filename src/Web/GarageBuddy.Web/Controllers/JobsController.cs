@@ -93,6 +93,11 @@ namespace GarageBuddy.Web.Controllers
         {
             if (!this.ModelState.IsValid)
             {
+                model.Customers = new SelectList(await this.customerService.GetAllSelectAsync(), "Id", "CustomerName");
+                model.Vehicles = new SelectList(await this.vehicleService.GetAllSelectAsync(), "Id", "RegistrationNumber");
+                model.JobStatuses = new SelectList(await this.jobStatusService.GetAllSelectAsync(), "Id", "StatusName");
+                model.Technicians = new SelectList(await this.technicianService.GetAllAsync(), "Id", "Name");
+                ViewBag.JobItemTypes = new SelectList(await this.jobItemTypeService.GetAllSelectAsync(), "Id", "Name");
                 return this.View(model);
             }
 
@@ -130,6 +135,11 @@ namespace GarageBuddy.Web.Controllers
         {
             if (!this.ModelState.IsValid)
             {
+                model.Customers = new SelectList(await this.customerService.GetAllSelectAsync(), "Id", "CustomerName");
+                model.Vehicles = new SelectList(await this.vehicleService.GetAllSelectAsync(), "Id", "RegistrationNumber");
+                model.JobStatuses = new SelectList(await this.jobStatusService.GetAllSelectAsync(), "Id", "StatusName");
+                model.Technicians = new SelectList(await this.technicianService.GetAllAsync(), "Id", "Name");
+                ViewBag.JobItemTypes = new SelectList(await this.jobItemTypeService.GetAllSelectAsync(), "Id", "Name");
                 return this.View(model);
             }
 

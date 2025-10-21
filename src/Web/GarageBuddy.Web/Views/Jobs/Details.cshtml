@@ -41,6 +41,17 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+<div>
+    <form asp-controller="Quotes" asp-action="Create" method="post">
+        <input type="hidden" name="jobId" value="@Model.Id" />
+        <button type="submit" class="btn btn-primary">Generate Quote</button>
+    </form>
+    <form asp-controller="Invoices" asp-action="Create" method="post">
+        <input type="hidden" name="jobId" value="@Model.Id" />
+        <button type="submit" class="btn btn-primary">Generate Invoice</button>
+    </form>
+</div>
+
 <h2>Job Items</h2>
 <table class="table">
     <thead>

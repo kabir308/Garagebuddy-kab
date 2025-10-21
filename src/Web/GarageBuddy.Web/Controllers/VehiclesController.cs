@@ -78,6 +78,11 @@ namespace GarageBuddy.Web.Controllers
         {
             if (!this.ModelState.IsValid)
             {
+                model.Customers = new SelectList(await this.customerService.GetAllSelectAsync(), "Id", "CustomerName");
+                model.Brands = new SelectList(await this.brandService.GetAllSelectAsync(), "Id", "Name");
+                model.FuelTypes = new SelectList(await this.fuelTypeService.GetAllSelectAsync(), "Id", "Name");
+                model.GearboxTypes = new SelectList(await this.gearboxTypeService.GetAllSelectAsync(), "Id", "Name");
+                model.DriveTypes = new SelectList(await this.driveTypeService.GetAllSelectAsync(), "Id", "Name");
                 return this.View(model);
             }
 
@@ -116,6 +121,12 @@ namespace GarageBuddy.Web.Controllers
         {
             if (!this.ModelState.IsValid)
             {
+                model.Customers = new SelectList(await this.customerService.GetAllSelectAsync(), "Id", "CustomerName");
+                model.Brands = new SelectList(await this.brandService.GetAllSelectAsync(), "Id", "Name");
+                model.BrandModels = new SelectList(await this.brandModelService.GetAllByBrandIdSelectAsync(model.BrandId), "Id", "Name");
+                model.FuelTypes = new SelectList(await this.fuelTypeService.GetAllSelectAsync(), "Id", "Name");
+                model.GearboxTypes = new SelectList(await this.gearboxTypeService.GetAllSelectAsync(), "Id", "Name");
+                model.DriveTypes = new SelectList(await this.driveTypeService.GetAllSelectAsync(), "Id", "Name");
                 return this.View(model);
             }
 
