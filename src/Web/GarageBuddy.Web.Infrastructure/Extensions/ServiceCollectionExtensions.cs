@@ -143,6 +143,9 @@ namespace GarageBuddy.Web.Infrastructure.Extensions
             // Options manager
             services.AddSingleton<IOptionsManager, OptionsManager>();
 
+            // AI Services
+            services.AddSingleton<IAiReceptionistService, AiReceptionistService>();
+
             return services;
         }
 
@@ -172,6 +175,10 @@ namespace GarageBuddy.Web.Infrastructure.Extensions
 
             services.AddOptions<EmailSettings>()
                 .BindConfiguration(nameof(EmailSettings))
+                .ValidateDataAnnotations();
+
+            services.AddOptions<GarageInfoSettings>()
+                .BindConfiguration(nameof(GarageInfoSettings))
                 .ValidateDataAnnotations();
 
             return services

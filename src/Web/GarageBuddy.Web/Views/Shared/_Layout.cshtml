@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="~/themes/mazer/dist/assets/compiled/css/app-dark.css" />
     <link rel="stylesheet" href="~/themes/mazer/dist/assets/compiled/css/app.css" />
     <link rel="stylesheet" href="css/site.min.css" />
-    <link rel="manifest" href="/manifest.json" />
     
     @await this.RenderSectionAsync("HeadScripts", required: false)
 </head>
@@ -64,18 +63,25 @@
     <script src="~/js/site.min.js" asp-append-version="true"></script>
     <partial name="_NotificationsPartial" />
     @await this.RenderSectionAsync("Scripts", required: false)
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(registration => {
-                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                    })
-                    .catch(error => {
-                        console.log('ServiceWorker registration failed: ', error);
-                    });
-            });
-        }
-    </script>
+
+    <!-- Chat Bubble -->
+    <div class="chat-bubble">
+        <i class="bi bi-chat-dots-fill"></i>
+    </div>
+
+    <!-- Chat Window -->
+    <div class="chat-window">
+        <div class="chat-header">
+            <h5>AI Receptionist</h5>
+            <button class="btn btn-sm btn-light chat-close">&times;</button>
+        </div>
+        <div class="chat-body">
+            <!-- Messages will be appended here -->
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chat-input" class="form-control" placeholder="Type a message...">
+            <button class="btn btn-primary" id="chat-send">Send</button>
+        </div>
+    </div>
 </body>
 </html>
