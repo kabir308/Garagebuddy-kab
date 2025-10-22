@@ -4,7 +4,7 @@ namespace GarageBuddy.Web.Areas.Admin.Controllers
 
     public class DashboardController : AdminController
     {
-        public DashboardController(IHtmlSanitizer sanitizer) : base(sanitizer)
+        public DashboardController()
         {
         }
 

@@ -5,6 +5,8 @@
 		<Nullable>enable</Nullable>
 
 		<IsPackable>false</IsPackable>
+		<EnableNETAnalyzers>true</EnableNETAnalyzers>
+		<AnalysisLevel>latest-Recommended</AnalysisLevel>
 	</PropertyGroup>
 
 	<PropertyGroup>

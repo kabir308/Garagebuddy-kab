@@ -5,6 +5,8 @@
 		<UserSecretsId>aspnet-GarageBuddy-BBB373B5-EF3F-4DBB-B8AA-7152CEC275BF</UserSecretsId>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
+		<EnableNETAnalyzers>true</EnableNETAnalyzers>
+		<AnalysisLevel>latest-Recommended</AnalysisLevel>
 	</PropertyGroup>
 
 	<PropertyGroup>

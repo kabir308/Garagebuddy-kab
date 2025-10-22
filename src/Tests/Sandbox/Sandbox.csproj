@@ -4,6 +4,8 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <LangVersion>latest</LangVersion>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest-Recommended</AnalysisLevel>
   </PropertyGroup>
 
 	<PropertyGroup>

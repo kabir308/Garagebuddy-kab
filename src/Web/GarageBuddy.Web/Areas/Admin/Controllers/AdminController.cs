@@ -1,17 +1,17 @@
-﻿namespace GarageBuddy.Web.Areas.Admin.Controllers
+namespace GarageBuddy.Web.Areas.Admin.Controllers
 {
-    using GarageBuddy.Web.Controllers;
-
+    using Ganss.Xss;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    using static GarageBuddy.Common.Constants.GlobalConstants;
+
+    [Authorize(Roles = AdministratorRoleName)]
     [Area("Admin")]
-    [Authorize(Policy = Policies.MechanicPolicy)]
-    public class AdminController : BaseController
+    public abstract class AdminController : BaseController
     {
-        public AdminController(IHtmlSanitizer sanitizer) : base(sanitizer)
+        protected AdminController()
         {
-            // Nothing to do here
         }
     }
 }
