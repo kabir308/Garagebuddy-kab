@@ -1,0 +1,29 @@
+name: garage_buddy_mobile
+description: A mobile application for Garage Buddy.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # For making HTTP requests to the backend API
+  http: ^1.1.0
+
+  # A simple and flexible state management solution
+  provider: ^6.0.5
+
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
