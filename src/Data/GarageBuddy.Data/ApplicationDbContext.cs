@@ -13,7 +13,6 @@
     using Models;
     using Models.Job;
     using Models.Vehicle;
-    using Models.WorkOrder;
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
     {
@@ -35,8 +34,6 @@
 
         public DbSet<JobStatus> JobStatus { get; set; } = null!;
         #endregion
-
-        public DbSet<WorkOrder> WorkOrders { get; set; } = null!;
 
         #region "Vehicles"
         public DbSet<Brand> Brands { get; set; } = null!;

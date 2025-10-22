@@ -1,9 +1,17 @@
-namespace GarageBuddy.Services.Data.Models.Customer
+﻿namespace GarageBuddy.Services.Data.Models.Customer
 {
-    using GarageBuddy.Data.Models;
-    using GarageBuddy.Services.Mapping;
+    using System;
 
-    public class CustomerServiceModel : IMapFrom<Customer>
+    using AutoMapper;
+
+    using Base;
+
+    using GarageBuddy.Data.Models;
+
+    using Mapping;
+
+    public class CustomerServiceModel : BaseListServiceModel,
+        IMapFrom<Customer>, IMapTo<Customer>, IHaveCustomMappings
     {
         public Guid Id { get; set; }
 
@@ -16,5 +24,19 @@ namespace GarageBuddy.Services.Data.Models.Customer
         public string? Phone { get; set; }
 
         public string? CompanyName { get; set; }
+
+        public string? ImageUrl { get; set; }
+
+        public string? Description { get; set; }
+
+        public Guid? ApplicationUserId { get; set; }
+
+        public void CreateMappings(IProfileExpression configuration)
+        {
+            configuration
+                .CreateMap<CustomerServiceModel, Customer>()
+                .ForMember(d => d.Id,
+                    opt => opt.Ignore());
+        }
     }
 }
