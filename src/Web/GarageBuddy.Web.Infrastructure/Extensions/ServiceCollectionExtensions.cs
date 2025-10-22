@@ -17,6 +17,7 @@ namespace GarageBuddy.Web.Infrastructure.Extensions
     using GarageBuddy.Common.Core.Settings;
     using GarageBuddy.Common.Core.Settings.Mail;
     using GarageBuddy.Data.Common.Repositories;
+    using GarageBuddy.Services.Data;
     using GarageBuddy.Services.Data.Contracts;
 
     using Microsoft.AspNetCore.Builder;
@@ -139,6 +140,7 @@ namespace GarageBuddy.Web.Infrastructure.Extensions
             services.AddScoped<IViewRenderer, ViewRenderer>();
             services.AddTransient<IEmailSender, SmtpMailSender>();
             services.AddTransient<IEmailService, EmailService>();
+            services.AddScoped<IWorkOrderPdfService, WorkOrderPdfService>();
 
             // Options manager
             services.AddSingleton<IOptionsManager, OptionsManager>();

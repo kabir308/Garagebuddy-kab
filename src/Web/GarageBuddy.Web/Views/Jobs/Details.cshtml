@@ -1,0 +1,54 @@
+@model GarageBuddy.Services.Data.Models.Job.JobServiceModel
+
+@{
+    ViewData["Title"] = "Job Details";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <h4>Job</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Customer.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Vehicle.Make)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Vehicle.Make)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+</div>
+
+@if (Model.WorkOrder == null)
+{
+    <form asp-controller="WorkOrders" asp-action="Create" method="post">
+        <input type="hidden" name="jobId" value="@Model.Id" />
+        <button type="submit" class="btn btn-primary">Create Work Order</button>
+    </form>
+}
+else
+{
+    <h4>Work Order</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Work Order Number
+        </dt>
+        <dd class="col-sm-10">
+            @Model.WorkOrder.WorkOrderNumber
+        </dd>
+    </dl>
+    <a asp-controller="WorkOrders" asp-action="Download" asp-route-id="@Model.WorkOrder.Id" class="btn btn-primary">Download PDF</a>
+}
