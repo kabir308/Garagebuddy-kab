@@ -146,6 +146,9 @@ namespace GarageBuddy.Web.Infrastructure.Extensions
             // AI Services
             services.AddSingleton<IAiReceptionistService, AiReceptionistService>();
 
+            // API Services
+            services.AddScoped<IJobApiService, JobApiService>();
+
             return services;
         }
 
