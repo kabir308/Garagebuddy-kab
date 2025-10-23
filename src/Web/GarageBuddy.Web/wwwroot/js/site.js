@@ -126,3 +126,59 @@ function validateCoordinates(coordString) {
     const regex = /^[-]?[0-9]+(\.[0-9]+)?,\s*[-]?[0-9]+(\.[0-9]+)?$/;
     return regex.test(coordString);
 }
+// Chat Bubble Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const chatBubble = document.querySelector('.chat-bubble');
+    const chatWindow = document.querySelector('.chat-window');
+    const chatClose = document.querySelector('.chat-close');
+    const chatSend = document.getElementById('chat-send');
+    const chatInput = document.getElementById('chat-input');
+    const chatBody = document.querySelector('.chat-body');
+
+    chatBubble.addEventListener('click', () => {
+        chatWindow.style.display = 'flex';
+    });
+
+    chatClose.addEventListener('click', () => {
+        chatWindow.style.display = 'none';
+    });
+
+    chatSend.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    });
+
+    function sendMessage() {
+        const message = chatInput.value;
+        if (!message) return;
+
+        appendMessage(message, 'user-message');
+        chatInput.value = '';
+
+        fetch('/api/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ message: message }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            appendMessage(data.response, 'bot-message');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            appendMessage('Sorry, something went wrong.', 'bot-message');
+        });
+    }
+
+    function appendMessage(message, className) {
+        const messageElement = document.createElement('div');
+        messageElement.className = `chat-message ${className}`;
+        messageElement.textContent = message;
+        chatBody.appendChild(messageElement);
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }
+});

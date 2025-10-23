@@ -63,5 +63,25 @@
     <script src="~/js/site.min.js" asp-append-version="true"></script>
     <partial name="_NotificationsPartial" />
     @await this.RenderSectionAsync("Scripts", required: false)
+
+    <!-- Chat Bubble -->
+    <div class="chat-bubble">
+        <i class="bi bi-chat-dots-fill"></i>
+    </div>
+
+    <!-- Chat Window -->
+    <div class="chat-window">
+        <div class="chat-header">
+            <h5>AI Receptionist</h5>
+            <button class="btn btn-sm btn-light chat-close">&times;</button>
+        </div>
+        <div class="chat-body">
+            <!-- Messages will be appended here -->
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chat-input" class="form-control" placeholder="Type a message...">
+            <button class="btn btn-primary" id="chat-send">Send</button>
+        </div>
+    </div>
 </body>
 </html>
